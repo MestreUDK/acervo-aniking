@@ -5,6 +5,7 @@ import animes from '../data/animes.json';
 
 export default function Home() {
   const [senha, setSenha] = useState('');
+  const [mostrarSenha, setMostrarSenha] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(false);
   const senhaCorreta = 'AnimesUDK2025';
 
@@ -23,13 +24,27 @@ export default function Home() {
         <h1>Acervo AniKing</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="senha">Digite a senha:</label>
-          <input
-            id="senha"
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            style={{ display: 'block', marginTop: 8, marginBottom: 12, width: '100%' }}
-          />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <input
+              id="senha"
+              type={mostrarSenha ? 'text' : 'password'}
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              style={{ flex: 1, marginTop: 8, marginBottom: 12 }}
+            />
+            <button
+              type="button"
+              onClick={() => setMostrarSenha((v) => !v)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontSize: 16,
+                cursor: 'pointer'
+              }}
+            >
+              {mostrarSenha ? '🙈' : '👁️'}
+            </button>
+          </div>
           <button type="submit">Entrar</button>
         </form>
       </main>
