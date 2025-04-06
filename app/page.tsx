@@ -1,6 +1,41 @@
+'use client';
+
+import { useState } from 'react';
 import animes from '../data/animes.json';
 
 export default function Home() {
+  const [senha, setSenha] = useState('');
+  const [acessoLiberado, setAcessoLiberado] = useState(false);
+  const senhaCorreta = 'AnimesUDK2025';
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (senha === senhaCorreta) {
+      setAcessoLiberado(true);
+    } else {
+      alert('Senha incorreta.');
+    }
+  };
+
+  if (!acessoLiberado) {
+    return (
+      <main style={{ padding: 20, maxWidth: 400, margin: '0 auto' }}>
+        <h1>Acervo AniKing</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="senha">Digite a senha:</label>
+          <input
+            id="senha"
+            type="password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            style={{ display: 'block', marginTop: 8, marginBottom: 12, width: '100%' }}
+          />
+          <button type="submit">Entrar</button>
+        </form>
+      </main>
+    );
+  }
+
   return (
     <main style={{ padding: 20 }}>
       <h1>Acervo AniKing</h1>
